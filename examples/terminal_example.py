@@ -6,12 +6,14 @@ from chatterbot import ChatBot
 # import logging
 # logging.basicConfig(level=logging.INFO)
 
+
 # Create a new instance of a ChatBot
 bot = ChatBot(
     "Terminal",
     storage_adapter="chatterbot.storage.JsonFileStorageAdapter",
+	trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
     logic_adapters=[
-        "chatterbot.logic.MathematicalEvaluation",
+       # "chatterbot.logic.MathematicalEvaluation",
         "chatterbot.logic.TimeLogicAdapter",
         "chatterbot.logic.BestMatch"
     ],
@@ -20,7 +22,10 @@ bot = ChatBot(
     database="../database.db"
 )
 
-print("Type something to begin...")
+bot.train("chatterbot.corpus.portuguese")
+bot.train("chatterbot.corpus.portuguese.greetings")
+
+print("Ok, vamos comecar...")
 
 # The following loop will execute each time the user enters input
 while True:
